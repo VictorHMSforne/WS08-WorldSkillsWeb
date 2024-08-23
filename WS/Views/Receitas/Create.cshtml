@@ -1,0 +1,53 @@
+﻿@model WS.Models.ViewModels.ReceitaViewModel
+@{
+    var receitas = ViewData["Receitas"] as List<WS.Models.ViewModels.ReceitaViewModel>;
+}
+
+<h2>Adicionar Receita</h2>
+
+<form asp-action="AdicionarReceita" method="post">
+    <div class="form-group">
+        <label asp-for="NomePaciente" class="control-label"></label>
+        <select asp-for="NomePaciente" class="form-control" asp-items="ViewBag.PacienteId"></select>
+    </div>
+    <div class="form-group">
+        <label asp-for="NomeRemedio" class="control-label"></label>
+        <input asp-for="NomeRemedio" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="Horario" class="control-label"></label>
+        <input asp-for="Horario" class="form-control" type="time" />
+    </div>
+    <div class="form-group">
+        <button type="submit">Adicionar</button>
+    </div>
+</form>
+
+<hr />
+
+<h2>Receitas Adicionadas</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Paciente</th>
+            <th>Remédio</th>
+            <th>Horário</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in receitas)
+        {
+            <tr>
+                <td>@item.NomePaciente</td>
+                <td>@item.NomeRemedio</td>
+                <td>@item.Horario</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<form asp-action="Finalizar" method="post">
+    <button type="submit" class="btn btn-success">Finalizar</button>
+</form>
+
